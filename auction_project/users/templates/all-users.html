@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Users</title>
+</head>
+<body>
+{% block content %}
+    {% for user in users %}
+        <p>{{ user.username }}</p>
+    {% endfor %}
+{% endblock %}
+</body>
+</html>

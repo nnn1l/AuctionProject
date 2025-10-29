@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Auction Categories{% endblock %}</title>
+
+</head>
+<body>
+
+    {% block content %}
+<div class="main-card text-center">
+    <h1 class="mb-4">
+        <span class="badge rounded-pill text-bg-light fs-3">Welcome to the Auction Home!</span>
+    </h1>
+    <h3 class="mb-5">Discover exclusive items across our premium categories</h3>
+
+    <div class="d-grid gap-3 col-md-8 mx-auto">
+        <a href="{% url 'antiques' %}" class="btn btn-lg category-btn"><i class="bi bi-hourglass-split"></i>Antiques</a>
+        <a href="{% url 'art-crafts' %}" class="btn btn-lg category-btn"><i class="bi bi-easel"></i>Art & Crafts</a>
+        <a href="{% url 'books-magazines' %}" class="btn btn-lg category-btn"><i class="bi bi-journals"></i>Books & Magazines</a>
+        <a href="{% url 'cars' %}" class="btn btn-lg category-btn"><i class="bi bi-car-front-fill"></i>Cars</a>
+        <a href="{% url 'clothing-shoes-accessories' %}" class="btn btn-lg category-btn"><i class="bi bi-sunglasses"></i>Clothing, Shoes & Accessories</a>
+        <a href="{% url 'electronics-computers' %}" class="btn btn-lg category-btn"><i class="bi bi-apple"></i>Electronics & Computers</a>
+        <a href="{% url 'furniture' %}" class="btn btn-lg category-btn"><i class="bi bi-lamp-fill"></i>Furniture</a>
+        <a href="{% url 'games-toys' %}" class="btn btn-lg category-btn"><i class="bi bi-controller"></i>Games & Toys</a>
+        <a href="{% url 'home-garden' %}" class="btn btn-lg category-btn"><i class="bi bi-house-fill"></i>Home & Garden</a>
+        <a href="{% url 'jewelry' %}" class="btn btn-lg category-btn"><i class="bi bi-gem"></i>Jewelry</a>
+        <a href="{% url 'music-instruments' %}" class="btn btn-lg category-btn"><i class="bi bi-earbuds"></i>Music & Instruments</a>
+        <a href="{% url 'photography-cameras' %}" class="btn btn-lg category-btn"><i class="bi bi-camera"></i>Photography & Cameras</a>
+        <a href="{% url 'sports-outdoors' %}" class="btn btn-lg category-btn"><i class="bi bi-backpack2"></i>Sports & Outdoors</a>
+        <a href="{% url 'stamps-coins' %}" class="btn btn-lg category-btn"><i class="bi bi-cash-coin"></i>Stamps & Coins</a>
+        <a href="{% url 'video-games-consoles' %}" class="btn btn-lg category-btn"><i class="bi bi-steam"></i>Video Games & Consoles</a>
+        <a href="{% url 'handmade' %}" class="btn btn-lg category-btn"><i class="bi bi-person-heart"></i>Handmade</a>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
