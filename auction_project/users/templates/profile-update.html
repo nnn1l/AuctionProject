@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit {{ user.username }}'s Profile{% endblock %}
+
+{% block content %}
+<div class="main-card">
+
+    <h1 class="text-center mb-4">
+        <span>Edit {{ user.username }}'s Profile</span>
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+                <h5>First Name</h5>
+                <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="text-danger">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5>Last Name</h5>
+                <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        <div class="text-danger">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h5>Username</h5>
+            <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="text-danger">{{ form.username.errors }}</div>
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="mb-3">
+            <h5>Bio</h5>
+            <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
+                {{ form.biography }}
+                {% if form.biography.errors %}
+                    <div class="text-danger">{{ form.biography.errors }}</div>
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a href="{% url 'user-profile' user.pk %}" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

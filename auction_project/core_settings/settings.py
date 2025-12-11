@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'items',
     'auctions',
+    'widget_tweaks',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +135,6 @@ MEDIA_URL = '/media/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = '/category/all/'
+LOGOUT_REDIRECT_URL = '/category/all/'

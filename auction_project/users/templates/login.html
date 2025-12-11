@@ -1,19 +1,40 @@
-{% extends 'base.html' %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% block title %}Реєстрація{% endblock %}
+{% extends 'base_light.html' %}
+
+{% block title %}Login{% endblock %}
 
 {% block content %}
-    <h2>Реєстрація</h2>
-    <form method="post" enctype="multipart/form-data">
+<div class="main-card text-center">
+
+    <h1 class="mb-4">
+        <span class="badge rounded-pill text-bg-light fs-3">Welcome Back!</span>
+    </h1>
+    <h3 class="mb-4">Log in to access your auctions</h3>
+
+    <form method="post" class="text-start">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зареєструватися</button>
+
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            {{ form.password }}
+        </div>
+
+        <button type="submit" class="btn btn-login w-100 mt-3">Login</button>
+
+        <p class="mt-4 text-center" style="color:#697fb8;">
+            Don’t have an account?
+            <a href="{% url 'user-register' %}" style="color:#7ebdff;">Register here</a>
+        </p>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+        {% endif %}
     </form>
+
+</div>
 {% endblock %}
-</body>
-</html>

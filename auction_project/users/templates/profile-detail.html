@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}'s Profile{% endblock %}
+
+{% block content %}
+<div class="main-card">
+
+    <h1 class="text-center mb-4">
+        <span>{{ user.username }}'s Profile</span>
+    </h1>
+
+    <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+            <h5>First Name</h5>
+            <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.first_name|default:"-" }}</p>
+        </div>
+        <div class="col-md-6 mb-3">
+            <h5>Last Name</h5>
+            <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.last_name|default:"-" }}</p>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <h5>Email</h5>
+        <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.email|default:"-" }}</p>
+    </div>
+
+    <div class="mb-3">
+        <h5>Bio</h5>
+        <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.biography|default:"-" }}</p>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+            <h5>Auction Hosted</h5>
+            <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.auction_hosted }}</p>
+        </div>
+        <div class="col-md-6 mb-3">
+            <h5>Auction Wins</h5>
+            <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.auction_wins }}</p>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <h5>Last Info Changed</h5>
+        <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.last_info_changed }}</p>
+    </div>
+
+    <div class="text-center mt-4">
+        {% if request.user.is_authenticated and request.user.pk == user.pk %}
+            <a href="{% url 'user-edit' user.pk %}" class="btn btn-info me-2">Edit Profile</a>
+        {% endif %}
+    </div>
+
+
+</div>
+{% endblock %}

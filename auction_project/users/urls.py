@@ -1,11 +1,16 @@
-from django.urls import path, include
+from tkinter.font import names
+
+from django.contrib.auth.views import LogoutView
+from django.urls import path
 
 from .views import hello
+from .views.settings_profile import UserRegisterView, UserLoginView, UserProfileView, UserUpdateProfileView
 
 urlpatterns = [
-    path('hello/', hello.hello, name = 'hello-users'),
     path('all_users/', hello.users_list, name='user-list'),
-    path('register/', ..., name='user-register'),
-    path('login/', ..., name='user-login'),
-    path('logout/', ..., name='user-logout'),
+    path('register/', UserRegisterView.as_view(), name='user-register'),
+    path('login/', UserLoginView.as_view(), name='user-login'),
+    path('logout/', LogoutView.as_view(), name='user-logout'),
+    path('profile/<int:pk>/', UserProfileView.as_view(), name='user-profile'),
+    path('profile/<int:pk>/edit/', UserUpdateProfileView.as_view(), name='user-edit')
     ]

@@ -11,20 +11,18 @@ class CustomUserRegisterForm(UserCreationForm):
     avatar = forms.ImageField(label='Avatar', required=False)
     biography = forms.CharField(widget=forms.Textarea, label='Biography', required=False)
 
-    password = forms.CharField(widget=forms.PasswordInput, label='Password')
-    verify_password = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
-
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ['first_name', 'last_name', 'username', 'avatar', 'email', 'biography']
-
-    def clean_verify_password(self):
-        password = self.cleaned_data.get('password')
-        verify_password = self.cleaned_data.get('verify_password')
-
-        if verify_password != password:
-            raise forms.ValidationError('Password dont match!')
-        return verify_password
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'avatar',
+            'biography',
+            'password1',
+            'password2'
+        ]
 
 
     def save(self, commit=True):
@@ -47,5 +45,5 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta(UserChangeForm.Meta):
         model = CustomUser
-        fields = ['first_name', 'last_name', 'username', 'avatar', 'email', 'biography']
+        fields = ['first_name', 'last_name', 'username', 'biography']
 

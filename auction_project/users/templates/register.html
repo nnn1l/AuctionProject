@@ -1,10 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_light.html' %}
+{% load widget_tweaks %}
 
-</body>
-</html>
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="main-card">
+
+    <h1 class="text-center mb-4">
+        <span>Sign up!</span>
+    </h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Name</label>
+                {{ form.first_name|add_class:"form-control"|attr:"placeholder:Enter your name" }}
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name</label>
+                {{ form.last_name|add_class:"form-control"|attr:"placeholder:Enter your last name" }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nickname</label>
+            {{ form.username|add_class:"form-control"|attr:"placeholder:Enter your nickname" }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            {{ form.email|add_class:"form-control"|attr:"placeholder:Enter your email" }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Avatar</label>
+            {{ form.avatar|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Bio</label>
+            {{ form.biography|add_class:"form-control"|attr:"placeholder:Tell something about yourself..." }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            {{ form.password1|add_class:"form-control"|attr:"placeholder:Enter password" }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Submit password</label>
+            {{ form.password2|add_class:"form-control"|attr:"placeholder:Confirm password" }}
+        </div>
+
+        <button type="submit" class="btn btn-info w-100 py-2 mt-3">
+            Sign up
+        </button>
+
+        <p class="text-center mt-3">
+            Do you have an account already?
+            <a href="{% url 'user-login' %}">Log in</a>
+        </p>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+
+    </form>
+</div>
+{% endblock %}
