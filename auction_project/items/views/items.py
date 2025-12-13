@@ -3,10 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
-from django.contrib.auth.views import LoginView
 from ..models.Item import Item
 
-@method_decorator(login_required, name='dispatch')
+#@method_decorator(login_required, name='dispatch')
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     template_name = 'item_template/item-create.html'
@@ -16,11 +15,15 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('user-profile', kwargs={'pk': self.request.user.pk})
 
-class ItemDetailView(DetailView):
+
+#@method_decorator(login_required, name='dispatch')
+class ItemDetailView(LoginRequiredMixin, DetailView):
     model = Item
     fields = ['title', 'category', 'image', 'description', 'owner']
-    template_name = 'item_template/item-detail.html'
+    template_name = 'item_template/item-details.html'
 
 
 class ItemUpdateView(UpdateView):
@@ -37,4 +40,4 @@ class ItemDeleteView(DeleteView):
     template_name = 'item_template/item-delete.html'
 
     def get_success_url(self):
-        return reverse_lazy('users/templates/profile-detail.html', kwargs={'pk':self.request.user.pk})
+        return reverse_lazy('user-profile', kwargs={'pk':self.request.user.pk})

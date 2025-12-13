@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+Items of {{ user.username }}
+{% endblock %}
+
+{% block content %}
+<div class="main-card">
+
+    <h1 class="text-center mb-4">
+        <span>{{ user.username }}'s items</span>
+    </h1>
+
+    {% if items %}
+        <div class="row g-4">
+
+            {% for item in items %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 text-light"
+                         style="
+                            background: rgba(255,255,255,0.07);
+                            backdrop-filter: blur(8px);
+                            border-radius: 16px;
+                            border: 1px solid rgba(255,255,255,0.2);
+                         ">
+
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}"
+                                 class="card-img-top"
+                                 alt="{{ item.title }}"
+                                 style="height: 200px; object-fit: cover;">
+                        {% endif %}
+
+                        <div class="card-body d-flex flex-column">
+
+                            <h5 class="card-title">
+                                {{ item.title }}
+                            </h5>
+
+                            <p class="card-text text-muted small mb-2">
+                                Category: {{ item.category.title }}
+                            </p>
+
+                            <p class="card-text flex-grow-1"
+                               style="font-size: 0.95rem;">
+                                {{ item.description|truncatechars:90 }}
+                            </p>
+
+                            <a href="{% url 'item-details' item.pk %}"
+                               class="btn btn-info mt-3 w-100">
+                                View details
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <p class="text-center mt-4 fs-5">
+            This user has no items yet.
+        </p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'user-profile' user.pk %}"
+           class="btn btn-outline-primary">
+            Back to profile
+        </a>
+    </div>
+
+</div>
+{% endblock %}

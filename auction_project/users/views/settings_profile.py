@@ -1,9 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.contrib.auth.views import LoginView
 from ..models import CustomUser
-from ..forms import CustomUserRegisterForm, CustomUserChangeForm
+from ..forms import CustomUserRegisterForm
+from items.models.Item import Item  #ignore IDE error
+from auctions.models.Auction import Auction
+
 
 class UserRegisterView(CreateView):
     model = CustomUser
@@ -34,3 +37,31 @@ class UserUpdateProfileView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('user-profile', kwargs={'pk': self.request.user.pk})
+
+
+class UsersItemsListView(LoginRequiredMixin, ListView):
+    model = Item
+    template_name = 'user-items.html'
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        return Item.objects.filter(owner__pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = CustomUser.objects.get(pk=self.kwargs['pk'])
+        return context
+
+
+class UsersAuctionListView(LoginRequiredMixin, ListView):
+    model = Auction
+    template_name = 'user-auctions.html'
+    context_object_name = 'auctions'
+
+    def get_queryset(self):
+        return Auction.objects.filter(owner__pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = CustomUser.objects.get(pk=self.kwargs['pk'])
+        return context

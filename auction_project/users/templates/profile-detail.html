@@ -51,7 +51,11 @@
             <a href="{% url 'user-edit' user.pk %}" class="btn btn-info me-2">Edit Profile</a>
         {% endif %}
     </div>
+</div>
 
-
+<div class="main-card">
+    <div class="text-center mt-4">
+        <a href="{% url 'user-items' user.pk %}" class="btn btn-light me-2">{{ user.username }}`s items</a>
+    </div>
 </div>
 {% endblock %}

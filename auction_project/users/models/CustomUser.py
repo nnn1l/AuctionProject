@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
-    avatar = models.ImageField(upload_to='user-avatars', blank=True, null=True)
-    biography = models.TextField(max_length=300, blank=True, null=True)
+    avatar = models.ImageField(upload_to='user-avatars', blank=True, default='default_images/default_avatar.png')
+    biography = models.TextField(max_length=300, blank=True, default='')
     last_info_changed = models.DateField(auto_now=True)
     auction_wins = models.IntegerField(default=0)
     auction_hosted = models.IntegerField(default=0)

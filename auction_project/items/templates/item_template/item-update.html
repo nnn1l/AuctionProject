@@ -1,10 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_light.html' %}
 
-</body>
-</html>
+{% block title %}Edit Item{% endblock %}
+
+{% block content %}
+<div class="main-card">
+
+    <h1 class="text-center mb-4">
+        <span>Edit Item</span>
+    </h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Title -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Title:</label>
+            <input type="text"
+                   name="title"
+                   class="form-control"
+                   value="{{ form.title.value|default:'' }}"
+                   placeholder="Enter item title">
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Category:</label>
+            {{ form.category }}
+        </div>
+
+        <!-- Image -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Image:</label>
+
+            {% if object.image %}
+                <div class="mb-2">
+                    <img src="{{ object.image.url }}"
+                         class="img-fluid rounded"
+                         style="max-height: 220px; border-radius: 12px; object-fit: cover;">
+                </div>
+            {% endif %}
+
+            {{ form.image }}
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Description:</label>
+            <textarea name="description"
+                      rows="4"
+                      class="form-control"
+                      placeholder="Enter description">{{ form.description.value|default:'' }}</textarea>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'item-details' object.pk %}" class="btn btn-outline-primary">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-info">
+                Save changes
+            </button>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}
