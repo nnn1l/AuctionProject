@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
 from ..models import CustomUser
 from ..forms import CustomUserRegisterForm
 from items.models.Item import Item  #ignore IDE error
@@ -11,16 +12,20 @@ from auctions.models.Auction import Auction
 class UserRegisterView(CreateView):
     model = CustomUser
     form_class = CustomUserRegisterForm
-    success_url = reverse_lazy('user-list')
+    success_url = reverse_lazy('all-categories')
     template_name = 'register.html'
 
     def form_valid(self, form):
-        user = form.save()
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
+
+
 
 class UserLoginView(LoginView):
     template_name = 'login.html'
-    success_url = reverse_lazy('user-list')
+    success_url = reverse_lazy('all-categories')
+
 
 class UserProfileView(DetailView):
     model = CustomUser
@@ -30,7 +35,7 @@ class UserProfileView(DetailView):
 class UserUpdateProfileView(LoginRequiredMixin, UpdateView):
     model = CustomUser
     template_name = 'profile-update.html'
-    fields = ['first_name', 'last_name', 'username', 'biography']
+    fields = ['first_name', 'last_name', 'username', 'biography', 'avatar']
 
     def get_object(self, queryset=None):
         return self.request.user

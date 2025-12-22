@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base_light.html" %}
+{% block title %}Create Auction{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="main-card">
+    <h1 class="mb-4 text-center">
+        <span>Create Auction</span>
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Auction fields -->
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            {{ form.title }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            {{ form.description }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">End time</label>
+            {{ form.end_time }}
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Start price</label>
+            {{ form.start_price }}
+        </div>
+
+        <!-- ITEMS -->
+        <h5 class="mb-3">Select items for auction</h5>
+
+        {% if items %}
+            <div class="list-group mb-4">
+                {% for item in items %}
+                    <label class="list-group-item">
+                        <input
+                            class="form-check-input me-2"
+                            type="checkbox"
+                            name="items"
+                            value="{{ item.id }}"
+                        >
+                        {{ item.title }}
+                    </label>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">You have no available items.</p>
+        {% endif %}
+
+        <button type="submit" class="btn btn-info w-100">
+            Create Auction
+        </button>
+    </form>
+</div>
+{% endblock %}

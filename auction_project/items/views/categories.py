@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from ..models.Category import Category
-from auctions.models.Auction import Auction #ignore error
-
+#from auctions.models.Auction import Auction #ignore error
+from ..models.Item import Item
 
 class CategoryListView(ListView):
     model = Category
@@ -10,13 +10,23 @@ class CategoryListView(ListView):
 
 class BaseCategoryListView(ListView):
     model = Category
+    template_name = 'category_template/category-base.html'
     context_object_name = 'categories'
-    category_title = 'base category'
+    category_title = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['auctions'] = Auction.objects.all()    #ignore IDE error
-        context['subject'] = Category.objects.filter(title=self.category_title).first()
+
+        category = Category.objects.filter(title=self.category_title).first()
+
+        context['subject'] = category
+
+        context['items'] = Item.objects.filter(
+            category=category,
+            auction__isnull=False,
+            auction__is_active=True,
+        ).select_related('auction')
+
         return context
 
 class AntiquesListView(BaseCategoryListView):
@@ -28,7 +38,7 @@ class ArtCraftsListView(BaseCategoryListView):
     category_title = "Art & Crafts"
 
 class CarsListView(BaseCategoryListView):
-    template_name = 'category_template/cars-trucks.html'
+    template_name = 'category_template/cars.html'
     category_title = "Cars"
 
 class ClothingShoesAccessoriesListView(BaseCategoryListView):
@@ -45,14 +55,14 @@ class FurnitureListView(BaseCategoryListView):
 
 class GamesToysListView(BaseCategoryListView):
     template_name = 'category_template/games-toys.html'
-    category_title = "Games & Toys"
+    category_title = "Games"
 
 class HomeGardenListView(BaseCategoryListView):
     template_name = 'category_template/home-garden.html'
     category_title = "Home & Garden"
 
 class JewelryListView(BaseCategoryListView):
-    template_name = 'category_template/jewelry-watches.html'
+    template_name = 'category_template/jewelry.html'
     category_title = "Jewelry"
 
 class MusicInstrumentsListView(BaseCategoryListView):

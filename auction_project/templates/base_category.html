@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Auction – Category{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(
+                120deg,
+                #f4faff,
+                #e9f3ff,
+                #dcecff
+            );
+            background-attachment: fixed;
+            font-family: 'Segoe UI', sans-serif;
+            color: #043b63;
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        /* ===== PAGE WRAPPER ===== */
+        .category-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px 60px;
+        }
+
+        /* ===== HEADER ===== */
+        .category-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .category-header h1 span {
+            background-color: rgba(0, 90, 170, 0.12);
+            color: #064b7c;
+            padding: 6px 16px;
+            border-radius: 10px;
+        }
+
+        .category-header p {
+            margin-top: 10px;
+            color: #4a6f8a;
+            font-size: 1.05rem;
+        }
+
+        /* ===== ITEM CARD ===== */
+        .item-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 18px;
+            border: 1px solid rgba(0, 90, 170, 0.12);
+            box-shadow: 0 6px 18px rgba(0, 90, 180, 0.12);
+            transition: all 0.25s ease-in-out;
+            height: 100%;
+        }
+
+        .item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(0, 90, 180, 0.2);
+        }
+
+        .item-card img {
+            height: 210px;
+            object-fit: cover;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .item-card .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-card h5 {
+            color: #043b63;
+            font-weight: 600;
+        }
+
+        .item-card .meta {
+            font-size: 0.85rem;
+            color: #6b8aa0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-auction {
+            margin-top: auto;
+            font-weight: 500;
+            background: linear-gradient(135deg, #6bbcff, #84d1ff);
+            border: none;
+            color: white;
+            box-shadow: 0 3px 10px rgba(75, 150, 255, 0.4);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .btn-auction:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #7dccff, #9be0ff);
+            box-shadow: 0 6px 18px rgba(75, 150, 255, 0.5);
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'all-categories' %}">
+            All categories
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto">
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-dark" href="{% url 'item-create' %}">
+                            Add Item
+                        </a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-secondary" href="{% url 'auction-create' %}">
+                            Add Auction
+                        </a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary"
+                           href="{% url 'user-profile' user.pk %}">
+                            Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'user-logout' %}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="btn btn-outline-danger">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item me-2">
+                        <a class="btn btn-primary" href="{% url 'user-register' %}">
+                            Register
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary" href="{% url 'user-login' %}">
+                            Login
+                        </a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="category-wrapper">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

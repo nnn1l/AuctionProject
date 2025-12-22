@@ -12,4 +12,4 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_name = factory.Faker('last_name')
     email = factory.LazyAttribute(lambda obj: f'{obj.username}@gmail.com')
     password = make_password('password')
-    biography = factory.Faker('Hi! This is my bio.')
+    biography = factory.Faker('sentence', nb_words=6)

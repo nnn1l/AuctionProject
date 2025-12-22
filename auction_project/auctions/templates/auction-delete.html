@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Delete auction{% endblock %}
+
+{% block content %}
+<div class="main-card text-center">
+
+    <h1 class="mb-4 text-danger">
+        Delete auction?
+    </h1>
+
+    <p class="fs-5">
+        Are you sure you want to delete
+        <strong>{{ object.title }}</strong>?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex gap-3 mt-4">
+            <button type="submit" class="btn btn-danger w-100">
+                Yes, delete
+            </button>
+            <a href="{% url 'auction-details' object.pk %}"
+               class="btn btn-outline-secondary w-100">
+                Cancel
+            </a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

@@ -88,11 +88,19 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            <div class="user-balance"
+            style="color: darkblue">
+        Balance: {{ user.wallet.balance }} $
+    </div>
+
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                     <li class="nav-item me-2">
                             <a class="btn btn-outline-dark" href="{% url 'item-create' %}">Add Item</a>
+                        </li>
+                    <li class="nav-item me-2">
+                            <a class="btn btn-outline-secondary" href="{% url 'auction-create' %}">Add Auction</a>
                         </li>
                     <li class="nav-item me-2">
                             <a class="btn btn-outline-primary" href="{% url 'user-profile' user.pk %}">Profile</a>

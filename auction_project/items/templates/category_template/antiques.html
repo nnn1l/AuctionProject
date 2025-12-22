@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base_category.html" %}
 
-</body>
-</html>
+{% block title %}
+{{ subject.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="category-header">
+    <h1><span>{{ subject.title }}</span></h1>
+    <p>Active auctions in this category</p>
+</div>
+
+<div class="row g-4">
+    {% for item in items %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card item-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5>{{ item.title }}</h5>
+
+                    <div class="meta mb-2">
+                        Auction ends: {{ item.auction.end_time|date:"M d, H:i" }}
+                    </div>
+
+                    <p class="flex-grow-1">
+                        {{ item.description|truncatechars:90 }}
+                    </p>
+
+                    <a href="{% url 'auction-details' item.auction.pk %}"
+                       class="btn btn-auction w-100">
+                        View auction
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center fs-5 mt-4">
+            No active auctions in this category.
+        </p>
+    {% endfor %}
+</div>
+
+{% endblock %}

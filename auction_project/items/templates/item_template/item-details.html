@@ -1,6 +1,6 @@
 {% extends 'base_light.html' %}
 
-{% block title %}Item Details{% endblock %}
+{% block title %}{{ object.title }}{% endblock %}
 
 {% block content %}
 <div class="main-card">
@@ -51,7 +51,7 @@
         {% if user.is_authenticated and user == object.owner %}
             <a href="{% url 'item-update' object.pk %}"
                class="btn btn-info">
-                Edit item
+                Edit
             </a>
             <a href="{% url 'item-delete' object.pk %}"
                class="btn btn-dark">

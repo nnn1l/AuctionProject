@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Place bid
+{% endblock %}
+
+{% block content %}
+<div class="main-card">
+
+    <h1 class="text-center mb-4">
+        <span>Place a bid</span>
+    </h1>
+
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Your bid amount</label>
+            {{ form.amount }}
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-info w-100">
+            Place bid
+        </button>
+    </form>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'auction-details' view.kwargs.pk %}"
+           class="btn btn-outline-primary">
+            Back to auction
+        </a>
+    </div>
+
+</div>
+{% endblock %}

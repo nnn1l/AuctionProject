@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}All Auctions{% endblock %}
+
+{% block content %}
+<div class="main-card">
+    <h1 class="text-center mb-4">
+        <span class="px-3 py-1 rounded">All Auctions</span>
+    </h1>
+
+    {% if auctions %}
+        <div class="row g-4">
+            {% for auction in auctions %}
+                {% with auction.items.first as item %}
+                <div class="col-md-6">
+                    <div class="card h-100 text-light border-light shadow-sm"
+                         style="background-color: rgba(255,255,255,0.07); backdrop-filter: blur(8px);">
+
+                        <!-- IMAGE -->
+                        {% if item %}
+                            <img src="{{ item.image.url }}"
+                                 class="card-img-top"
+                                 style="height: 220px; object-fit: cover;"
+                                 alt="Item image">
+                        {% endif %}
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ auction.title }}</h5>
+
+                            <p class="card-text small opacity-75">
+                                {{ auction.description|truncatechars:120 }}
+                            </p>
+
+                            {% if item %}
+                                <p class="mb-1">
+                                    <i class="bi bi-box"></i>
+                                    <strong>Item:</strong> {{ item.title }}
+                                </p>
+                            {% endif %}
+
+                            <p class="mb-1">
+                                <i class="bi bi-cash-stack"></i>
+                                <strong>Start price:</strong> {{ auction.start_price }}
+                            </p>
+
+                            <p class="mb-1">
+                                <i class="bi bi-clock"></i>
+                                <strong>Ends:</strong> {{ auction.end_time }}
+                            </p>
+
+                            <p class="mb-3">
+                                <i class="bi bi-activity"></i>
+                                <strong>Status:</strong>
+                                {% if auction.is_active %}
+                                    <span class="text-success">Active</span>
+                                {% else %}
+                                    <span class="text-danger">Finished</span>
+                                {% endif %}
+                            </p>
+
+                            <a href="{% url 'auction-detail' auction.pk %}"
+                               class="btn btn-info w-100 mt-auto">
+                                View Auction
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3 class="text-center mt-4">
+            No auctions yet 🫤
+        </h3>
+    {% endif %}
+</div>
+{% endblock %}

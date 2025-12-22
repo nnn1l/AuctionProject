@@ -26,7 +26,7 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
     template_name = 'item_template/item-details.html'
 
 
-class ItemUpdateView(UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = Item
     fields = ['title', 'category', 'image', 'description']
     template_name = 'item_template/item-update.html'

@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{ user.username }}'s Profile{% endblock %}
 
 {% block content %}
 <div class="main-card">
 
     <h1 class="text-center mb-4">
-        <span>{{ user.username }}'s Profile</span>
+        <span>{{ user.username }}</span>
     </h1>
+
+    <div class="text-center mb-4">
+    <img src="{{ user.avatar_url }}"
+         alt="avatar"
+         class="rounded-circle border shadow"
+         width="140"
+         height="140"
+         style="object-fit: cover;">
+</div>
 
     <div class="row mb-3">
         <div class="col-md-6 mb-3">

@@ -8,6 +8,6 @@ def hello(request):
     return response.HttpResponse("Hello")
 
 def users_list(request):
-    template_name = 'all-users.html'
+    template_name = 'all-auctions.html'
     all_users = CustomUser.objects.all()
-    return render(request, "all-users.html", {"users": all_users})
+    return render(request, "all-auctions.html", {"users": all_users})
