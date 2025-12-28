@@ -1,12 +1,12 @@
 {% extends "base_light.html" %}
-
-{% block title %}Edit auction{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Edit auction'%}{% endblock %}
 
 {% block content %}
 <div class="main-card">
 
     <h1 class="text-center mb-4">
-        <span>Edit auction</span>
+        <span>{% trans 'Edit auction'%}</span>
     </h1>
 
     <form method="post">
@@ -16,11 +16,11 @@
 
         <div class="d-flex gap-3 mt-4">
             <button type="submit" class="btn btn-info w-100">
-                Save changes
+                {% trans 'Save changes'%}
             </button>
             <a href="{% url 'auction-details' object.pk %}"
                class="btn btn-outline-secondary w-100">
-                Cancel
+                {% trans 'Cancel'%}
             </a>
         </div>
     </form>

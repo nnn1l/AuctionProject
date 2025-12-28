@@ -1,44 +1,44 @@
 {% extends 'base_light.html' %}
 {% load widget_tweaks %}
-
-{% block title %}Create Item{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Create Item'%}{% endblock %}
 
 {% block content %}
 <div class="main-card">
 
     <h1 class="text-center mb-4">
-        <span>Create New Item</span>
+        <span>{% trans 'Create New Item'%}</span>
     </h1>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="mb-3">
-            <label class="form-label">Title</label>
+            <label class="form-label">{% trans 'Title'%}</label>
             {{ form.title|add_class:"form-control"|attr:"placeholder:Enter item title" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Category</label>
+            <label class="form-label">{% trans 'Category'%}</label>
             {{ form.category|add_class:"form-select"|attr:"placeholder:Select category" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Image</label>
+            <label class="form-label">{% trans 'Image'%}</label>
             {{ form.image|add_class:"form-control" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Description</label>
+            <label class="form-label">{% trans 'Description'%}</label>
             {{ form.description|add_class:"form-control"|attr:"placeholder:Describe your item..." }}
         </div>
 
         <button type="submit" class="btn btn-info w-100 py-2 mt-3">
-            Create Item
+            {% trans 'Create Item'%}
         </button>
 
         <p class="text-center mt-3">
-            <a href="{% url 'user-profile' request.user.pk %}">Back to your profile</a>
+            <a href="{% url 'user-profile' request.user.pk %}">{% trans 'Back to your profile'%}</a>
         </p>
 
     </form>

@@ -1,16 +1,16 @@
 {% extends 'base_light.html' %}
-
-{% block title %}Delete Item{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Delete Item'%}{% endblock %}
 
 {% block content %}
 <div class="main-card text-center">
 
     <h1 class="mb-4">
-        <span>Delete Item</span>
+        <span>{% trans 'Delete Item'%}</span>
     </h1>
 
     <p class="fs-5 mb-4">
-        Are you sure you want to delete
+        {% trans 'Are you sure you want to delete'%}
         <strong class="text-danger">{{ object.title }}</strong>?
     </p>
 
@@ -29,12 +29,12 @@
         <div class="d-flex justify-content-center gap-3 mt-4">
             <a href="{% url 'item-details' object.pk %}"
                class="btn btn-outline-primary px-4">
-                Cancel
+                {% trans 'Cancel'%}
             </a>
 
             <button type="submit"
                     class="btn btn-outline-danger px-4">
-                Delete
+                {% trans 'Delete'%}
             </button>
         </div>
     </form>

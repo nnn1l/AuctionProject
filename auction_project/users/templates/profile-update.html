@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Edit {{ user.username }}'s Profile{% endblock %}
+{% load i18n %}
+{% block title %}Edit {{ user.username }}{% trans "'s Profile"%}{% endblock %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 
 ```
 <h1 class="text-center mb-4">
-    Edit {{ user.username }}'s Profile
+    {% trans 'Edit'%} {{ user.username }}{% trans "'s Profile"%}
 </h1>
 
 <div class="text-center mb-4">
@@ -25,7 +25,7 @@
     {% csrf_token %}
 
     <div class="mb-4">
-        <label class="form-label fw-semibold">Avatar</label>
+        <label class="form-label fw-semibold">{% trans 'Avatar'%}</label>
         <div class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
             {{ form.avatar.as_widget }}
             {% if form.avatar.errors %}
@@ -36,7 +36,7 @@
 
     <div class="row">
         <div class="col-md-6 mb-3">
-            <label class="form-label fw-semibold">First name</label>
+            <label class="form-label fw-semibold">{% trans 'First name'%}</label>
             <div class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
                 {{ form.first_name }}
                 {% if form.first_name.errors %}
@@ -46,7 +46,7 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <label class="form-label fw-semibold">Last name</label>
+            <label class="form-label fw-semibold">{% trans 'Last name'%}</label>
             <div class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
                 {{ form.last_name }}
                 {% if form.last_name.errors %}
@@ -57,7 +57,7 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label fw-semibold">Username</label>
+        <label class="form-label fw-semibold">{% trans 'Username'%}</label>
         <div class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
             {{ form.username }}
             {% if form.username.errors %}
@@ -67,7 +67,7 @@
     </div>
 
     <div class="mb-4">
-        <label class="form-label fw-semibold">Bio</label>
+        <label class="form-label fw-semibold">{% trans 'Bio'%}</label>
         <div class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">
             {{ form.biography }}
             {% if form.biography.errors %}
@@ -77,8 +77,8 @@
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-4">
-        <button type="submit" class="btn btn-success px-4">Save changes</button>
-        <a href="{% url 'user-profile' user.pk %}" class="btn btn-secondary px-4">Cancel</a>
+        <button type="submit" class="btn btn-success px-4">{% trans 'Save changes'%}</button>
+        <a href="{% url 'user-profile' user.pk %}" class="btn btn-secondary px-4">{% trans 'Cancel'%}</a>
     </div>
 
 </form>

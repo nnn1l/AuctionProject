@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Auction{% endblock %}</title>
+    <title>{% block title %}{% trans 'Auction'%}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -82,7 +82,7 @@
     <!-- === NAVBAR === -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'all-categories' %}">All categories</a>
+            <a class="navbar-brand" href="{% url 'all-categories' %}">{% trans 'All categories'%}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -90,33 +90,50 @@
 
             <div class="user-balance"
             style="color: darkblue">
-        Balance: {{ user.wallet.balance }} $
+                {% trans 'Balance'%}: {{ user.wallet.balance }} $
     </div>
+            <form action="{% url 'set_language' %}" method="post" class="d-flex ms-3">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.get_full_path }}">
 
+    {% get_current_language as LANGUAGE_CODE %}
+
+    {% if LANGUAGE_CODE == 'en' %}
+        <input type="hidden" name="language" value="uk">
+        <button type="submit" class="btn btn-outline-primary">
+            🇺🇦 UK
+        </button>
+    {% else %}
+        <input type="hidden" name="language" value="en">
+        <button type="submit" class="btn btn-outline-primary">
+            🇬🇧 EN
+        </button>
+    {% endif %}
+</form>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                     <li class="nav-item me-2">
-                            <a class="btn btn-outline-dark" href="{% url 'item-create' %}">Add Item</a>
+                            <a class="btn btn-outline-dark" href="{% url 'item-create' %}">{% trans 'Add Item'%}</a>
                         </li>
                     <li class="nav-item me-2">
-                            <a class="btn btn-outline-secondary" href="{% url 'auction-create' %}">Add Auction</a>
+                            <a class="btn btn-outline-secondary" href="{% url 'auction-create' %}">{% trans 'Add Auction'%}</a>
                         </li>
                     <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary" href="{% url 'user-profile' user.pk %}">Profile</a>
+                            <a class="btn btn-outline-primary" href="{% url 'user-profile' user.pk %}">{% trans 'Profile'%}</a>
                         </li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'user-logout' %}">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-danger">Logout</button>
+                                <button type="submit" class="btn btn-outline-danger">{% trans 'Logout'%}</button>
                             </form>
                         </li>
                     {% else %}
                         <li class="nav-item me-2">
-                            <a class="btn btn-primary" href="{% url 'user-register' %}">Register</a>
+                            <a class="btn btn-primary" href="{% url 'user-register' %}">{% trans 'Register'%}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-primary" href="{% url 'user-login' %}">Login</a>
+                            <a class="btn btn-outline-primary" href="{% url 'user-login' %}">{% trans 'Login'%}</a>
                         </li>
                     {% endif %}
                 </ul>

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ user.username }}'s Profile{% endblock %}
+{% load i18n %}
+
+{% block title %}{{ user.username }}{% trans "'s Profile"%}{% endblock %}
 
 {% block content %}
 <div class="main-card">
@@ -20,51 +22,51 @@
 
     <div class="row mb-3">
         <div class="col-md-6 mb-3">
-            <h5>First Name</h5>
+            <h5>{% trans 'First Name'%}</h5>
             <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.first_name|default:"-" }}</p>
         </div>
         <div class="col-md-6 mb-3">
-            <h5>Last Name</h5>
+            <h5>{% trans 'Last Name'%}</h5>
             <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.last_name|default:"-" }}</p>
         </div>
     </div>
 
     <div class="mb-3">
-        <h5>Email</h5>
+        <h5>{% trans 'Email'%}</h5>
         <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.email|default:"-" }}</p>
     </div>
 
     <div class="mb-3">
-        <h5>Bio</h5>
+        <h5>{% trans 'Bio'%}</h5>
         <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.biography|default:"-" }}</p>
     </div>
 
     <div class="row mb-3">
         <div class="col-md-6 mb-3">
-            <h5>Auction Hosted</h5>
+            <h5>{% trans 'Auction Hosted'%}</h5>
             <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.auction_hosted }}</p>
         </div>
         <div class="col-md-6 mb-3">
-            <h5>Auction Wins</h5>
+            <h5>{% trans 'Auction Wins'%}</h5>
             <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.auction_wins }}</p>
         </div>
     </div>
 
     <div class="mb-3">
-        <h5>Last Info Changed</h5>
+        <h5>{% trans 'Last Info Changed'%}</h5>
         <p class="p-3 rounded" style="background-color: rgba(255,255,255,0.08);">{{ user.last_info_changed }}</p>
     </div>
 
     <div class="text-center mt-4">
         {% if request.user.is_authenticated and request.user.pk == user.pk %}
-            <a href="{% url 'user-edit' user.pk %}" class="btn btn-info me-2">Edit Profile</a>
+            <a href="{% url 'user-edit' user.pk %}" class="btn btn-info me-2">{% trans 'Edit Profile'%}</a>
         {% endif %}
     </div>
 </div>
 
 <div class="main-card">
     <div class="text-center mt-4">
-        <a href="{% url 'user-items' user.pk %}" class="btn btn-light me-2">{{ user.username }}`s items</a>
+        <a href="{% url 'user-items' user.pk %}" class="btn btn-light me-2">{{ user.username }}{% trans '`s items'%}</a>
     </div>
 </div>
 {% endblock %}

@@ -1,12 +1,12 @@
 {% extends 'base_light.html' %}
-
-{% block title %}Edit Item{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Edit Item'%}{% endblock %}
 
 {% block content %}
 <div class="main-card">
 
     <h1 class="text-center mb-4">
-        <span>Edit Item</span>
+        <span>{% trans 'Edit Item'%}</span>
     </h1>
 
     <form method="post" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
 
         <!-- Title -->
         <div class="mb-3">
-            <label class="form-label fw-semibold">Title:</label>
+            <label class="form-label fw-semibold">{% trans 'Title'%}:</label>
             <input type="text"
                    name="title"
                    class="form-control"
@@ -24,7 +24,7 @@
 
         <!-- Category -->
         <div class="mb-3">
-            <label class="form-label fw-semibold">Category:</label>
+            <label class="form-label fw-semibold">{% trans 'Category'% }:</label>
             {{ form.category }}
         </div>
 

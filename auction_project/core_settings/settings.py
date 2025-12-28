@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'core_settings.urls'
@@ -139,3 +140,14 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_REDIRECT_URL = '/category/all/'
 LOGOUT_REDIRECT_URL = '/category/all/'
 LOGIN_URL = '/accounts/login/'
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
+
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('uk', 'Ukrainian'),
+]
+

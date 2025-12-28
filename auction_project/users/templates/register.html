@@ -1,13 +1,13 @@
 {% extends 'base_light.html' %}
 {% load widget_tweaks %}
-
-{% block title %}Register{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Register'%}{% endblock %}
 
 {% block content %}
 <div class="main-card">
 
     <h1 class="text-center mb-4">
-        <span>Sign up!</span>
+        <span>{% trans 'Sign up'%}!</span>
     </h1>
 
     <form method="post" enctype="multipart/form-data">
@@ -15,53 +15,53 @@
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label class="form-label">Name</label>
-                {{ form.first_name|add_class:"form-control"|attr:"placeholder:Enter your name" }}
+                <label class="form-label">{% trans 'Name'%}</label>
+                {{ form.first_name|add_class:"form-control"|attr:"placeholder:{% trans 'Enter your name'%}" }}
             </div>
 
             <div class="col-md-6 mb-3">
-                <label class="form-label">Last Name</label>
-                {{ form.last_name|add_class:"form-control"|attr:"placeholder:Enter your last name" }}
+                <label class="form-label">{% trans 'Last Name'%}</label>
+                {{ form.last_name|add_class:"form-control"|attr:"placeholder:{% trans 'Enter your last name'%}" }}
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Nickname</label>
-            {{ form.username|add_class:"form-control"|attr:"placeholder:Enter your nickname" }}
+            <label class="form-label">{% trans 'Nickname'%}</label>
+            {{ form.username|add_class:"form-control"|attr:"placeholder:{% trans 'Enter your nickname'%}" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Email</label>
-            {{ form.email|add_class:"form-control"|attr:"placeholder:Enter your email" }}
+            <label class="form-label">{% trans 'Email'%}</label>
+            {{ form.email|add_class:"form-control"|attr:"placeholder:{% trans 'Enter your email'%}" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Avatar</label>
+            <label class="form-label">{% trans 'Avatar'%}</label>
             {{ form.avatar|add_class:"form-control" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Bio</label>
-            {{ form.biography|add_class:"form-control"|attr:"placeholder:Tell something about yourself..." }}
+            <label class="form-label">{% trans 'Bio'%}</label>
+            {{ form.biography|add_class:"form-control"|attr:"placeholder:{% trans 'Tell something about yourself...'%}" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Password</label>
-            {{ form.password1|add_class:"form-control"|attr:"placeholder:Enter password" }}
+            <label class="form-label">{% trans 'Password'%}</label>
+            {{ form.password1|add_class:"form-control"|attr:"placeholder:{% trans 'Enter password'%}" }}
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Submit password</label>
-            {{ form.password2|add_class:"form-control"|attr:"placeholder:Confirm password" }}
+            <label class="form-label">{% trans 'Submit password'%}</label>
+            {{ form.password2|add_class:"form-control"|attr:"placeholder:{% trans 'Confirm password'%}" }}
         </div>
 
         <button type="submit" class="btn btn-info w-100 py-2 mt-3">
-            Sign up
+            {% trans 'Sign up'%}
         </button>
 
         <p class="text-center mt-3">
-            Do you have an account already?
-            <a href="{% url 'user-login' %}">Log in</a>
+            {% trans 'Do you have an account already'%}?
+            <a href="{% url 'user-login' %}">{% trans 'Log in'%}</a>
         </p>
         {% if form.errors %}
             <div class="alert alert-danger">

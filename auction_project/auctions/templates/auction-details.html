@@ -1,7 +1,7 @@
 {% extends "base_light.html" %}
-
+{% load i18n %}
 {% block title %}
-Auction – {{ auction.title }}
+{% trans 'Auction'%} – {{ auction.title }}
 {% endblock %}
 
 {% block content %}
@@ -12,30 +12,30 @@ Auction – {{ auction.title }}
     </h1>
 
     <p class="text-center text-muted mb-4">
-        Created by
+        {% trans 'Created by'%}
         <a href="{% url 'user-profile' auction.owner.pk %}">
             {{ auction.owner.username }}
         </a>
     </p>
 
     <div class="mb-4">
-        <h3>Description</h3>
+        <h3>{% trans 'Description'%}</h3>
         <p>{{ auction.description }}</p>
     </div>
 
     <div class="row text-center mb-4">
         <div class="col-md-4 mb-2">
-            <strong>Start price</strong><br>
+            <strong>{% trans 'Start price'%}</strong><br>
             {{ auction.start_price }} $
         </div>
 
         <div class="col-md-4 mb-2">
-            <strong>Current price</strong><br>
+            <strong>{% trans 'Current price'%}</strong><br>
             {{ auction.current_price }} $
         </div>
 
         <div class="col-md-4 mb-2">
-            <strong>Ends at</strong><br>
+            <strong>{% trans 'Ends at'%}</strong><br>
             {{ auction.end_time }}
         </div>
     </div>
@@ -44,12 +44,12 @@ Auction – {{ auction.title }}
         <div class="text-center mb-5">
             <a href="{% url 'bid-create' auction.pk %}"
                class="btn btn-info">
-                Place a bid
+                {% trans 'Place a bid'%}
             </a>
         </div>
     {% endif %}
 
-    <h3 class="mb-4 text-center">Auction items</h3>
+    <h3 class="mb-4 text-center">{% trans 'Auction items'%}</h3>
 
     {% if auction.items.all %}
         <div class="row g-4"> {% for item in auction.items.all %} <div class="col-md-6 col-lg-4">
@@ -69,7 +69,7 @@ Auction – {{ auction.title }}
                     <p class="card-text flex-grow-1" style="font-size: 0.95rem; color: darkgrey;">
                         {{ item.description|truncatechars:90 }} </p>
                     <a href="{% url 'item-details' item.pk %}" class="btn btn-info mt-3 w-100">
-                        View item
+                        {% trans 'View item'%}
                     </a>
                 </div>
             </div>
@@ -78,35 +78,35 @@ Auction – {{ auction.title }}
         </div>
     {% else %}
     <p class="text-center text-muted mt-4">
-        No items in this auction yet.
+        {% trans 'No items in this auction yet.'%}
     </p> {% endif %}
 
 
     <div class="d-flex justify-content-between align-items-center mt-5">
         <a href="{% url 'all-categories' %}"
            class="btn btn-outline-primary">
-            Back
+            {% trans 'Back'%}
         </a>
 
         {% if user.is_authenticated and user == auction.owner %}
             <div>
                 <a href="{% url 'auction-update' auction.pk %}"
                    class="btn btn-info me-2">
-                    Edit
+                    {% trans 'Edit'%}
                 </a>
             </div>
             <div>
                 <form method="post" action="{% url 'auction-end' auction.pk %}">
                     {% csrf_token %}
                     <button class="btn btn-danger">
-                        End now
+                        {% trans 'End now'%}
                     </button>
                 </form>
             </div>
             <div>
                 <a href="{% url 'auction-delete' auction.pk %}"
                    class="btn btn-dark">
-                    Delete
+                    {% trans 'Delete'%}
                 </a>
             </div>
         {% endif %}

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}
-Items of {{ user.username }}
+{% trans 'Items of'%} {{ user.username }}
 {% endblock %}
 
 {% block content %}
 <div class="main-card">
 
     <h1 class="text-center mb-4">
-        <span>{{ user.username }}'s items</span>
+        <span>{{ user.username }}{% trans '`s items'%}</span>
     </h1>
 
     {% if items %}
@@ -38,7 +38,7 @@ Items of {{ user.username }}
                             </h5>
 
                             <p class="card-text text-muted small mb-2">
-                                Category: {{ item.category.title }}
+                                {% trans 'Category'%}: {{ item.category.title }}
                             </p>
 
                             <p class="card-text flex-grow-1"
@@ -48,7 +48,7 @@ Items of {{ user.username }}
 
                             <a href="{% url 'item-details' item.pk %}"
                                class="btn btn-info mt-3 w-100">
-                                View details
+                                {% trans 'View details'%}
                             </a>
 
                         </div>
@@ -59,14 +59,14 @@ Items of {{ user.username }}
         </div>
     {% else %}
         <p class="text-center mt-4 fs-5">
-            This user has no items yet.
+            {% trans 'This user has no items yet.'%}
         </p>
     {% endif %}
 
     <div class="text-center mt-4">
         <a href="{% url 'user-profile' user.pk %}"
            class="btn btn-outline-primary">
-            Back to profile
+            {% trans 'Back to profile'%}
         </a>
     </div>
 

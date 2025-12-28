@@ -10,6 +10,8 @@ from auctions.models.Auction import Auction
 
 
 class UserRegisterView(CreateView):
+    """  View for registration new users  """
+
     model = CustomUser
     form_class = CustomUserRegisterForm
     success_url = reverse_lazy('all-categories')
@@ -23,16 +25,23 @@ class UserRegisterView(CreateView):
 
 
 class UserLoginView(LoginView):
+    """  View for logining  """
+
     template_name = 'login.html'
     success_url = reverse_lazy('all-categories')
 
 
 class UserProfileView(DetailView):
+    """  View for user`s detail info  """
+
     model = CustomUser
     template_name = 'profile-detail.html'
     context_object_name = 'user'
 
+
 class UserUpdateProfileView(LoginRequiredMixin, UpdateView):
+    """  View for updating user`s info  """
+
     model = CustomUser
     template_name = 'profile-update.html'
     fields = ['first_name', 'last_name', 'username', 'biography', 'avatar']
@@ -45,6 +54,8 @@ class UserUpdateProfileView(LoginRequiredMixin, UpdateView):
 
 
 class UsersItemsListView(LoginRequiredMixin, ListView):
+    """  View for user`s items list  """
+
     model = Item
     template_name = 'user-items.html'
     context_object_name = 'items'
@@ -58,15 +69,15 @@ class UsersItemsListView(LoginRequiredMixin, ListView):
         return context
 
 
-class UsersAuctionListView(LoginRequiredMixin, ListView):
-    model = Auction
-    template_name = 'user-auctions.html'
-    context_object_name = 'auctions'
+#class UsersAuctionListView(LoginRequiredMixin, ListView):
+#    model = Auction
+#    template_name = 'user-auctions.html'
+#    context_object_name = 'auctions'
 
-    def get_queryset(self):
-        return Auction.objects.filter(owner__pk=self.kwargs['pk'])
+#    def get_queryset(self):
+#        return Auction.objects.filter(owner__pk=self.kwargs['pk'])
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = CustomUser.objects.get(pk=self.kwargs['pk'])
-        return context
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        context['user'] = CustomUser.objects.get(pk=self.kwargs['pk'])
+#        return context
