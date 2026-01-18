@@ -18,7 +18,7 @@ Auction Shop is a web application for running online auctions where users can cr
 
 1. Clone the repository:
 
-git clone <repository URL>
+git clone https://github.com/nnn1l/AuctionProject
 cd Auction_shop
 
 2. Create and activate a virtual environment:
