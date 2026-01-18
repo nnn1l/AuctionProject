@@ -1,6 +1,6 @@
 import factory
 from .models.Item import Item, Category
-from users.factories import UserFactory
+from users.tests.factories import UserFactory
 
 class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:

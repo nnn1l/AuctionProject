@@ -20,6 +20,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from .api.api import api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('category/', include('items.category-urls')),
     path('auction/', include('auctions.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path("api/", api.urls),
 ]
 
 

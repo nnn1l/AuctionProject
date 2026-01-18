@@ -1,6 +1,5 @@
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models.Auction import Auction
 from ..models.Bid import Bid

@@ -29,3 +29,16 @@ class AuctionReadSchema(AuctionBaseSchema):
     class Config:
         from_attributes = True
 
+
+class BidIn(BaseModel):
+    auction_id: int
+    amount: Decimal
+
+
+class BidOut(BaseModel):
+    id: int
+    amount: Decimal
+    bidder_id: int
+
+    class Config:
+        from_attributes = True

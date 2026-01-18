@@ -1,5 +1,8 @@
+from decimal import Decimal
+
 import factory
-from .models.CustomUser import CustomUser
+from users.models.CustomUser import CustomUser
+from users.models.Wallet import Wallet
 from django.contrib.auth.hashers import make_password
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -13,3 +16,11 @@ class UserFactory(factory.django.DjangoModelFactory):
     email = factory.LazyAttribute(lambda obj: f'{obj.username}@gmail.com')
     password = make_password('password')
     biography = factory.Faker('sentence', nb_words=6)
+
+
+class WalletFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Wallet
+
+    user = factory.SubFactory(UserFactory)
+    balance = Decimal('10000.00')

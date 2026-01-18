@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from django.utils import timezone
 from django.db import models
+from pydantic import ValidationError
 from users.models.CustomUser import CustomUser # ignore errors with import, it works
 
 
@@ -67,14 +68,19 @@ class Auction(models.Model):
         return self.title
 
     def update_current_price(self, amount):
-        """  Updates price of auction  """
+        """Updates auction price if bid is valid"""
 
         if not isinstance(amount, Decimal):
             amount = Decimal(str(amount))
 
-        if amount > self.current_price:
-            self.current_price = amount
-            self.save(update_fields=['current_price'])
+        if not self.is_active or self.end_time <= timezone.now():
+            raise ValidationError("Auction has ended.")
+
+        if amount <= self.current_price:
+            raise ValidationError("Bid must be higher than current price.")
+
+        self.current_price = amount
+        self.save(update_fields=['current_price'])
 
 
     def attach_items(self, items):

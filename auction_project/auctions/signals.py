@@ -1,5 +1,5 @@
 from decimal import Decimal
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from .models.Bid import Bid
@@ -35,3 +35,10 @@ def handle_new_bid(sender, instance, created, **kwargs):
     wallet.save(update_fields=['balance'])
 
     auction.update_current_price(amount)
+
+
+@receiver(post_delete, sender=Bid)
+def refund_bidder(sender, instance, **kwargs):
+    wallet = Wallet.objects.select_for_update().get(user=instance.bidder)
+    wallet.balance += instance.amount
+    wallet.save(update_fields=['balance'])

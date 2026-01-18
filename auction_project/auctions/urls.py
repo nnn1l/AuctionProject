@@ -1,5 +1,3 @@
-from tkinter.font import names
-
 from django.urls import path
 from .views.auctions import AuctionCreateView, AuctionDeleteView, AuctionDetailView, AuctionUpdateView, AuctionEndView
 from .views.bids import BidCreateView

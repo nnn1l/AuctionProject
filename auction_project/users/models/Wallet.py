@@ -9,7 +9,7 @@ class Wallet(models.Model):
         CustomUser,
         on_delete=models.CASCADE,
         related_name='wallet',
-        verbose_name=_('Owner')
+        verbose_name=_('Owner')    #  <-- '_' is gettext_lazy()
     )
 
     balance = models.DecimalField(

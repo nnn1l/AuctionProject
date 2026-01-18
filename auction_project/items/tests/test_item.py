@@ -2,9 +2,9 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.conf import settings
-from .models import Item
-from .factories import CategoryFactory, ItemFactory
-from users.factories import UserFactory
+from items.models.Item import Item
+from items.factories import CategoryFactory, ItemFactory
+from users.tests.factories import UserFactory
 
 User = get_user_model()
 

@@ -19,7 +19,7 @@ class AuctionCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['items'] = Item.objects.filter(
             owner=self.request.user,
-            auction__isnull=True
+            auction__isnull=True   # items are able to have only 1 auction
         )
         return context
 
